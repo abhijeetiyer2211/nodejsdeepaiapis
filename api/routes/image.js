@@ -13,8 +13,6 @@ router.get('/',(req,res,next) => {
         
         if(operationType === 'colorizer'){
             
-          
-            
             let resultImage = '';
             async function process() {
                 var resp = await deepai.callStandardApi("colorizer", {
@@ -29,25 +27,6 @@ router.get('/',(req,res,next) => {
                 });
             }
             process();
-        }
-        else if(operationType === "neural-style" && isImageURL(imageStyle)){
-            // const deepai = require('deepai'); // OR include deepai.min.js as a script tag in your HTML
-            // deepai.setApiKey('quickstart-QUdJIGlzIGNvbWluZy4uLi4K');
-
-            async function neuralStyle() {
-                var resp = await deepai.callStandardApi("neural-style", {
-                    style: imageStyle,
-                    content: imageUrl,
-                });
-                console.log(resp);
-                res.status(200).json({
-                    message:`${operationType} operation success`,
-                    inputImage_url:imageUrl,
-                    inputStyleImage_url:imageStyle,
-                    output_url:resp.output_url 
-                })
-            }
-            neuralStyle();
         }
     }
     else{
